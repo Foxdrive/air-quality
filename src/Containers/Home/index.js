@@ -4,6 +4,8 @@ import ReactMapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import styleJSON from '../../style.json';
 
+import Panel from '../../Components/Panel';
+
 
 class MapContainer extends React.Component {
   constructor(props) {
@@ -48,12 +50,13 @@ class MapContainer extends React.Component {
   render(props){
     return (
       <div>
-      <ReactMapGL
-        {...this.state.viewport}
-        mapboxApiAccessToken={this.props.apiKey}
-        mapStyle={styleJSON}
-        onViewportChange={this.handleOnViewportChange}
-      />
+        <Panel />
+        <ReactMapGL
+          {...this.state.viewport}
+          mapboxApiAccessToken={this.props.apiKey}
+          mapStyle={styleJSON}
+          onViewportChange={this.handleOnViewportChange}
+        />
       </div>
     );
   }
