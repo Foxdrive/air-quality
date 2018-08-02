@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import About from './Components/About';
-import Home from './Components/Home';
-import Help from './Components/Help';
-import Support from './Components/Support';
+import About from './Containers/About';
+import Home from './Containers/Home';
+import Help from './Containers/Help';
+import Support from './Containers/Support';
 
-
+import Nav from './Components/Nav';
 
 
 class App extends Component {
@@ -14,7 +15,8 @@ class App extends Component {
     return (
       <Router>
         <main>
-          <Route exact path='/' component={Home}></Route>
+          <Nav />
+          <Route exact path='/' render={() => <Home apiKey={this.props.apiKey} /> }></Route>
           <Route path='/about' component={About}></Route>
           <Route path='/help' component={Help}></Route>
           <Route path='/support' component={Support}></Route>
@@ -22,6 +24,10 @@ class App extends Component {
       </Router>
     );
   }
+}
+
+App.propTypes = {
+  apiKey: PropTypes.string
 }
 
 export default App;
