@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "mapbox-gl": "^0.45.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -15,5 +16,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-popper": "^1.0.0",
+    "react-transition-group": "^2.4.0",
+    "reactstrap": "^6.3.1"
   }
 }

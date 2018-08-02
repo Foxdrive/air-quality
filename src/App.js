@@ -8,6 +8,7 @@ import Help from './Containers/Help';
 import Support from './Containers/Support';
 
 import Nav from './Components/Nav';
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 class App extends Component {
