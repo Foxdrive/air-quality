@@ -10,7 +10,29 @@ import Support from './Containers/Support';
 import Nav from './Components/Nav';
 import 'bootstrap/dist/css/bootstrap.css';
 
+import FetchData from './api';
+
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.requestData = this.requestData.bind(this);
+    this.state = {
+      data: {}
+    };
+  }
+
+  requestData() {
+    new FetchData()
+    .requestData()
+    .then((data) => {console.log(data); this.setState({...this.state, data})});
+  }
+
+  componentDidMount() {
+    this.requestData();
+    setInterval((() => this.requestData()), 10000) 
+  }
+
   render() {
     return (
       <Router>
