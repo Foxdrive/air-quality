@@ -7,7 +7,7 @@ import Home from './Containers/Home';
 import Help from './Containers/Help';
 import Support from './Containers/Support';
 
-import Nav from './Components/Nav';
+import TopNav from './Components/Nav';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import FetchData from './api';
@@ -37,7 +37,7 @@ class App extends Component {
     return (
       <Router>
         <main>
-          <Nav />
+          <TopNav />
           <Route exact path='/' render={() => <Home apiKey={this.props.apiKey} /> }></Route>
           <Route path='/about' component={About}></Route>
           <Route path='/help' component={Help}></Route>
