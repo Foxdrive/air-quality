@@ -9,8 +9,8 @@ class FetchData {
       return measurements.reduce((parsedResult, current, i) => {
         parsedResult.push({
           measurement: current.series && current.series[0].values,
-          lat: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].values[1],
-          lng: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].values[2]
+          lat: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].values[0][1],
+          lng: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].values[0][2]
         });
         return parsedResult;
       }, [])

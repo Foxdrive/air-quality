@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactMapGL  from 'react-map-gl';
+import ReactMapGL, { Marker }  from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import styleJSON from '../../style.json';
 
@@ -48,15 +48,23 @@ class MapContainer extends React.Component {
   }
 
   render(props){
+    const { apiKey, data } = this.props;
     return (
       <div>
         <Panel />
         <ReactMapGL
           {...this.state.viewport}
-          mapboxApiAccessToken={this.props.apiKey}
+          mapboxApiAccessToken={apiKey}
           mapStyle={styleJSON}
           onViewportChange={this.handleOnViewportChange}
-        > 
+          doubleClickZoom={false}
+        >
+          {Array.isArray(data) && data.map((device) =>
+          (device.lat && device.lng) && 
+            <Marker key={device.lat + device.lng} latitude={device.lat} longitude={device.lng}>
+              <div style={{color: 'red'}}>Device location</div>
+            </Marker>
+          )}
         </ReactMapGL>
       </div>
     );
