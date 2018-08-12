@@ -8,7 +8,6 @@ import Help from './Containers/Help';
 import Support from './Containers/Support';
 
 import TopNav from './Components/Nav';
-import 'bootstrap/dist/css/bootstrap.css';
 
 import FetchData from './api';
 
