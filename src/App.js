@@ -24,7 +24,9 @@ class App extends Component {
   requestData() {
     new FetchData()
     .requestData()
-    .then((data) => this.setState({...this.state, data}));
+    .then((data) => {
+        this.setState({...this.state, data})
+      });
   }
 
   componentDidMount() {
