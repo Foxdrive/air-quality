@@ -25,12 +25,12 @@ class App extends Component {
   requestData() {
     new FetchData()
     .requestData()
-    .then((data) => {console.log(data); this.setState({...this.state, data})});
+    .then((data) => this.setState({...this.state, data}));
   }
 
   componentDidMount() {
     this.requestData();
-    setInterval((() => this.requestData()), 10000) 
+    setInterval((() => this.requestData()), 900000) 
   }
 
   render() {

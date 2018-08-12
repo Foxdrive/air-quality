@@ -7,7 +7,7 @@ class FetchData {
   }
 
   async requestData() {
-    let response = await fetch(constructQuery(this.timeDifference))
+    let response = await fetch(constructQuery())
     let data = await response.ok && response.json();
     return data;
   }

@@ -1,21 +1,18 @@
 import config from './config';
 const resource = `http://aqa.unloquer.org:8086/query?db=aqa&epoch=s&q=`;
 
-/*
-  Function that requests data from all devices.
-  First we need to generate all subqueries that follow a format such as mean('25') for every device using the config
-  Then, we need to concatenate every query using semicolons as separators.
-  Every query needs to be encoded so the request doesn't fail because of special characters such as ';'
-  Finally, we define a time for every query using InfluxDB's query language
-*/
-const constructQuery = (difference='1m') => {
-  const subqueries = Object.values(config.devices).map((device) => {
-    let variables = device.measurements.map(((measure, i, arr) => `mean("${measure}")`));
-    return encodeURIComponent(`SELECT ${variables} FROM ${config.database}.${`"${device.device}"`} WHERE time > now() - ${difference};`);
+const constructQuery = () => {
+  const measurements = config.devices.map((device) => {
+    let queryMeasurements = config.measurements.map((measurement, i, arr) => arr.length === i + 1 ? `SUM("${measurement}")`: `SUM("${measurement}") + `)
+    return encodeURIComponent(
+      `SELECT "result" FROM (SELECT ${queryMeasurements.join('')} AS "result" FROM ${config.database}.${`"${device}"`} WHERE time > now() - 24h GROUP BY time(30m));`)
   });
-  return `${resource}${subqueries.join('')}`;
+  const locations = config.devices.map((device) => 
+    encodeURIComponent(`SELECT mean("lat"), mean("lng") FROM ${config.database}.${`"${device}"`} WHERE time > now() - 1h;`)
+  )
+  return `${resource}${measurements.join('')}${locations.join('')}`;
 }
-    
+
 export default constructQuery;
 
 
