@@ -8,10 +8,32 @@ import Help from './Containers/Help';
 import Support from './Containers/Support';
 
 import TopNav from './Components/Nav';
-import 'bootstrap/dist/css/bootstrap.css';
 
+import FetchData from './api';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.requestData = this.requestData.bind(this);
+    this.state = {
+      data: {}
+    };
+  }
+
+  requestData() {
+    new FetchData()
+    .requestData()
+    .then((data) => {
+        this.setState({...this.state, data})
+      });
+  }
+
+  componentDidMount() {
+    this.requestData();
+    setInterval((() => this.requestData()), 900000) 
+  }
+
   render() {
     return (
       <Router>
