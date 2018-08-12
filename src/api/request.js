@@ -8,7 +8,7 @@ const constructQuery = () => {
       `SELECT "result" FROM (SELECT ${queryMeasurements.join('')} AS "result" FROM ${config.database}.${`"${device}"`} WHERE time > now() - 24h GROUP BY time(30m));`)
   });
   const locations = config.devices.map((device) => 
-    encodeURIComponent(`SELECT mean("lat"), mean("lng") FROM ${config.database}.${`"${device}"`} WHERE time > now() - 1h;`)
+    encodeURIComponent(`SELECT mean("lat") AS "lat", mean("lng") AS "lng" FROM ${config.database}.${`"${device}"`} WHERE time > now() - 1h;`)
   )
   return `${resource}${measurements.join('')}${locations.join('')}`;
 }
