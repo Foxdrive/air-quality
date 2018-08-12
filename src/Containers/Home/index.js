@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL  from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import styleJSON from '../../style.json';
 
@@ -56,7 +56,8 @@ class MapContainer extends React.Component {
           mapboxApiAccessToken={this.props.apiKey}
           mapStyle={styleJSON}
           onViewportChange={this.handleOnViewportChange}
-        />
+        > 
+        </ReactMapGL>
       </div>
     );
   }
