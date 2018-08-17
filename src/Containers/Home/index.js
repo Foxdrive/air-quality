@@ -2,10 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMapGL, { Marker }  from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import styleJSON from '../../style.json';
+import 'rc-slider/assets/index.css';
 
+
+import last from 'lodash/last'
+import filter from 'lodash/filter';
+import Slider from 'rc-slider';
+
+
+import styleJSON from '../../style.json';
+import AppContext from '../../context.js';
 import Panel from '../../Components/Panel';
 
+const createSliderWithTooltip = Slider.createSliderWithTooltip;
+const Range = createSliderWithTooltip(Slider.Range);
 
 class MapContainer extends React.Component {
   constructor(props) {
@@ -21,12 +31,17 @@ class MapContainer extends React.Component {
     };
 
     this.handleOnViewportChange = this.handleOnViewportChange.bind(this);
+    this.handleRangeChange = this.handleRangeChange.bind(this);
     this._resize = this._resize.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('resize', this._resize);
     this._resize();
+  }
+
+  handleRangeChange(range) {
+    this.props.filterDevices(range);
   }
 
   componentWillUnmount() {
@@ -47,26 +62,31 @@ class MapContainer extends React.Component {
     this.setState({viewport});
   }
 
-  render(props){
-    const { apiKey, data } = this.props;
+  render(){
+    const { apiKey } = this.props;
     return (
-      <div>
-        <Panel />
-        <ReactMapGL
-          {...this.state.viewport}
-          mapboxApiAccessToken={apiKey}
-          mapStyle={styleJSON}
-          onViewportChange={this.handleOnViewportChange}
-          doubleClickZoom={false}
-        >
-          {Array.isArray(data) && data.map((device) =>
-          (device.lat && device.lng) && 
-            <Marker key={device.lat + device.lng} latitude={device.lat} longitude={device.lng}>
-              <div style={{color: 'red'}}>Device location</div>
-            </Marker>
-          )}
-        </ReactMapGL>
-      </div>
+      <AppContext.Consumer>
+      {(state) =>
+        <div>
+          <Panel>
+            <Range min={0} max={40000} step={1000} onChange={this.handleRangeChange} tipFormatter={value => `${value}`}></Range>
+          </Panel>
+          <ReactMapGL
+            {...this.state.viewport}
+            mapboxApiAccessToken={apiKey}
+            mapStyle={styleJSON}
+            onViewportChange={this.handleOnViewportChange}
+            doubleClickZoom={false}
+          >
+              {Array.isArray(state.data) && filter(state.data, (device) => last(device.measurement)[1] >= state.filter[0] && last(device.measurement)[1] <= state.filter[1]).map((device) =>
+                <Marker key={device.lat + device.lng} latitude={device.lat} longitude={device.lng}>
+                  <div style={{color: 'red'}}>Device location</div>
+                </Marker>
+              )}
+          </ReactMapGL>
+        </div>
+      }     
+      </AppContext.Consumer>
     );
   }
 }

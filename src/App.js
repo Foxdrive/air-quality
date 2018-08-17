@@ -19,7 +19,11 @@ class App extends Component {
     super(props);
     this.requestData = this.requestData.bind(this);
     this.state = {
-      data: {}
+      data: {},
+      filter: [],
+      filterDevices: (filter) => {
+        this.setState({filter})
+      }
     };
   }
 
@@ -40,11 +44,11 @@ class App extends Component {
     return (
       <Router>
         <main>
-          <AppContext.Provider value={this.state.data}>
+          <AppContext.Provider value={this.state}>
             <TopNav />
               <Route exact path='/' render={() => 
                 <AppContext.Consumer>
-                  {(data) => <Home apiKey={this.props.apiKey} data={data} />}
+                  {(state) => <Home apiKey={this.props.apiKey} data={state.data} filterDevices={state.filterDevices} />}
                 </AppContext.Consumer>
               }>
             </Route>
