@@ -80,7 +80,7 @@ class MapContainer extends React.Component {
           >
               {Array.isArray(state.data) && filter(state.data, (device) => last(device.measurement)[1] >= state.filter[0] && last(device.measurement)[1] <= state.filter[1]).map((device) =>
                 <Marker key={device.lat + device.lng} latitude={device.lat} longitude={device.lng}>
-                  <div style={{color: 'red'}}>Device location</div>
+                  <div style={{color: 'red'}}>{device.name}</div>
                 </Marker>
               )}
           </ReactMapGL>

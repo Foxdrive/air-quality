@@ -15,7 +15,8 @@ class FetchData {
         parsedResult.push({
           measurement: current.series && current.series[0].values,
           lat: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].values[0][1],
-          lng: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].values[0][2]
+          lng: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].values[0][2],
+          name: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].name
         });
         return parsedResult;
       }, [])
