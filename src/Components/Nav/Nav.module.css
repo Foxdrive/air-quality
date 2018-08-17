@@ -1,3 +1,19 @@
+@font-face {
+    font-family: din-next-w01-light;
+    src: url(../../assets/fonts/din-next-w01-light.woff);
+    font-weight: normal;
+}
+@font-face {
+    font-family: din-next-w02-light;
+    src: url(../../assets/fonts/din-next-w02-light.woff);
+    font-weight: normal;
+}
+@font-face {
+    font-family: din-next-w10-light;
+    src: url(../../assets/fonts/din-next-w10-light.woff);
+    font-weight: normal;
+}
+
 .hc1{
   position: absolute;
   left: 0px;
@@ -120,7 +136,7 @@
 .wp2img img {
   width: 275px;
   height: 110px;
-  object-fit: cover;
+  /*object-fit: cover;*/
 }
 .tm1 {
   visibility: hidden;
@@ -131,16 +147,27 @@
     position: absolute;
     left: 0px;
     margin-left: 0px;
-    width: 320px;
+    min-width: 100%;
+    width: 100%;
     top: 0px;
     height: 162px;
     z-index: 5000;
   }
   .hc1screenWidthBackground{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
     left:0;
     width:100%
   }
-
+  .hc1bg{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
   .tm1 {
     visibility: visible;
     left: 251px;
@@ -205,8 +232,8 @@
       overflow-x: hidden;
       width: 100%;
       -webkit-overflow-scrolling: touch;
-      padding-top: 38px; 
-      max-height: 569px;
+      padding-top: 0; 
+      max-height: 100%;
   }
 
   .tm1menuContainer .tm1_submenu {
@@ -216,6 +243,33 @@
   .tm1menuContainer .tm1_item.tm1_open>.tm1_submenu {
       display: block;
   }
+
+    .fullScreenOverlay {
+        z-index: 1005;
+        position: fixed;
+        left: 0;
+        top: -60px;
+        right: 0;
+        bottom: 0;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        overflow-y: hidden;
+    }
+    .fullScreenOverlay>.fullScreenOverlayContent {
+        margin: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        overflow: hidden;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
 
   .tm1fullScreenOverlay {
       pointer-events: none;
@@ -243,7 +297,7 @@
   }
 
   .tm1fullScreenOverlayContent{
-    width:320px;
+    width:100%;
     top:0;
   }
 
@@ -396,6 +450,7 @@
   .tm1menuContainer .tm1_firstSection {
       padding-top: 80px;
       padding-bottom: 20px;
+      padding-left: 0;
   }
 
   .tm1menuContainer .tm1_nthSection {
@@ -466,6 +521,7 @@
       -webkit-flex-direction: column;
       flex-direction: column;
       letter-spacing: 2px;
+      list-style-type: none;
   }
 
   .tm1menuContainer .tm1_top-menu .tm1_force-scroll {
@@ -951,7 +1007,8 @@
   }
 
   .wp2{
-    left: 65px;
+    left: 50%;
+    margin-left: -95px;
     position: absolute;
     top: 10px;
     width: 190px;
