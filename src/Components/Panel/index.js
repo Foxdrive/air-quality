@@ -5,7 +5,7 @@ class Panel extends React.Component {
   render() {
     return (
       <article className={styles.panel}>
-        <p>ESTE ES EL PANEL DEL SLIDER</p>
+        {this.props.children}
       </article>
     );
   }
