@@ -1,5 +1,6 @@
 .panel {
   display: flex;
+  flex-direction: column;
   position: fixed;
   width: 300px;
   height: 380px;
@@ -7,6 +8,6 @@
   top: 50%;
   border-radius: 40px;
   background-color: white;
-  padding: 10px;
+  padding: 20px;
   z-index: 1;
 }

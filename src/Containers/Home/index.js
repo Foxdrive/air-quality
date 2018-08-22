@@ -8,6 +8,7 @@ import 'rc-slider/assets/index.css';
 import last from 'lodash/last'
 import filter from 'lodash/filter';
 import Slider from 'rc-slider';
+import { Line } from 'react-chartjs-2';
 
 
 import styleJSON from '../../style.json';
@@ -16,6 +17,7 @@ import Panel from '../../Components/Panel';
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
+
 
 class MapContainer extends React.Component {
   constructor(props) {
@@ -63,13 +65,40 @@ class MapContainer extends React.Component {
   }
 
   render(){
-    const { apiKey } = this.props;
+    const { apiKey } = this.props;  
+    
     return (
       <AppContext.Consumer>
       {(state) =>
         <div>
           <Panel>
-            <Range min={0} max={40000} step={1000} onChange={this.handleRangeChange} tipFormatter={value => `${value}`}></Range>
+            <div style={{width: '100%'}}>
+              <Range min={0} max={40000} step={1000} onChange={this.handleRangeChange} tipFormatter={value => `${value}`}></Range>
+            </div>
+            <div>
+              <Line
+              options={{
+                legend: {
+                  display: false
+                },
+                scales: {
+                  xAxes: [{
+                    ticks: {
+                      max: 1,
+                      min: 1
+                    }
+                  }],
+                  
+                }
+              }}
+              data={{
+                labels: state.data[1] && state.data[1].measurement.reduce((acc, current) => {acc.push(current[0]); return acc}, []),
+                datasets: [{
+                  data: state.data[1] && state.data[1].measurement.reduce((acc, current) => {acc.push(current[1]); return acc}, [])
+                }]
+              }}
+              />
+            </div>
           </Panel>
           <ReactMapGL
             {...this.state.viewport}
