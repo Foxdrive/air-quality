@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactMapGL, { Marker }  from 'react-map-gl';
+import ReactMapGL, { Marker, Popup} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'rc-slider/assets/index.css';
 
@@ -80,15 +80,6 @@ class MapContainer extends React.Component {
               options={{
                 legend: {
                   display: false
-                },
-                scales: {
-                  xAxes: [{
-                    ticks: {
-                      max: 1,
-                      min: 1
-                    }
-                  }],
-                  
                 }
               }}
               data={{
