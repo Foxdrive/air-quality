@@ -71,7 +71,7 @@ class Nav extends React.Component {
       <nav className={styles.ddm1} dir="ltr">
         <ul aria-label="Site navigation" role="navigation" className={styles.ddm1itemsContainer}>
           <li data-direction="ltr" data-listposition="center" className={classNames(styles.ddm1repeaterButton, styles.active)} aria-hidden="false">
-            <a role="button" tabindex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
+            <a role="button" tabIndex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
                 target="_self" className={styles.ddm1repeaterButtonlinkElement}>
               <div className={styles.ddm1repeaterButton_gapper}>
                   <div className={styles.ddm1repeaterButtonbg}>
@@ -81,7 +81,7 @@ class Nav extends React.Component {
             </a>
           </li>
           <li data-direction="ltr" data-listposition="center" className={styles.ddm1repeaterButton} aria-hidden="false">
-            <a role="button" tabindex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
+            <a role="button" tabIndex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
                 target="_self" className={styles.ddm1repeaterButtonlinkElement}>
               <div className={styles.ddm1repeaterButton_gapper}>
                 <div className={styles.ddm1repeaterButtonbg}>
@@ -91,7 +91,7 @@ class Nav extends React.Component {
             </a>
           </li>
           <li data-direction="ltr" data-listposition="center" className={styles.ddm1repeaterButton} aria-hidden="false">
-            <a role="button" tabindex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
+            <a role="button" tabIndex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
                 target="_self" className={styles.ddm1repeaterButtonlinkElement}>
               <div className={styles.ddm1repeaterButton_gapper}>
                 <div className={styles.ddm1repeaterButtonbg}>
@@ -101,7 +101,7 @@ class Nav extends React.Component {
             </a>
           </li>
           <li data-direction="ltr" data-listposition="center" className={styles.ddm1repeaterButton} aria-hidden="false">
-            <a role="button" tabindex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
+            <a role="button" tabIndex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
                 target="_self" className={styles.ddm1repeaterButtonlinkElement}>
               <div className={styles.ddm1repeaterButton_gapper}>
                 <div className={styles.ddm1repeaterButtonbg}>
@@ -111,7 +111,7 @@ class Nav extends React.Component {
             </a>
           </li>
           <li data-direction="ltr" data-listposition="center" className={styles.ddm1repeaterButton} aria-hidden="false">
-            <a role="button" tabindex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
+            <a role="button" tabIndex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
                 target="_self" className={styles.ddm1repeaterButtonlinkElement}>
               <div className={styles.ddm1repeaterButton_gapper}>
                 <div className={styles.ddm1repeaterButtonbg}>
@@ -121,7 +121,7 @@ class Nav extends React.Component {
             </a>
           </li>
           <li data-direction="ltr" data-listposition="center" className={styles.ddm1repeaterButton} aria-hidden="false">
-            <a role="button" tabindex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
+            <a role="button" tabIndex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
                 target="_self" className={styles.ddm1repeaterButtonlinkElement}>
               <div className={styles.ddm1repeaterButton_gapper}>
                 <div className={styles.ddm1repeaterButtonbg}>
@@ -131,7 +131,7 @@ class Nav extends React.Component {
             </a>
           </li>
           <li data-direction="ltr" data-listposition="center" className={styles.ddm1repeaterButton} aria-hidden="false">
-            <a role="button" tabindex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
+            <a role="button" tabIndex="0" aria-haspopup="false" data-listposition="center" href="https://giampaolobramante.wixsite.com/cometa"
                 target="_self" className={styles.ddm1repeaterButtonlinkElement}>
               <div className={styles.ddm1repeaterButton_gapper}>
                 <div className={styles.ddm1repeaterButtonbg}>
