@@ -1,5 +1,4 @@
 import React from 'react';
-/*import { Link } from 'react-router-dom';*/
 import styles from './Nav.module.css';
 import classNames from 'classnames';
 import Media from "react-media";
