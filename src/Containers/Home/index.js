@@ -13,6 +13,7 @@ import Slider from 'rc-slider';
 import styleJSON from '../../style.json';
 import AppContext from '../../context.js';
 import Panel from '../../Components/Panel';
+import Comet from '../../assets/images/cometa-icon.svg';
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -80,7 +81,7 @@ class MapContainer extends React.Component {
           >
               {Array.isArray(state.data) && filter(state.data, (device) => last(device.measurement)[1] >= state.filter[0] && last(device.measurement)[1] <= state.filter[1]).map((device) =>
                 <Marker key={device.lat + device.lng} latitude={device.lat} longitude={device.lng}>
-                  <div style={{color: 'red'}}>{device.name}</div>
+                  <img src={Comet} width="30px" alt={device.name} title={device.name}/>
                 </Marker>
               )}
           </ReactMapGL>

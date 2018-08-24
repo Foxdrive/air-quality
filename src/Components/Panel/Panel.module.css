@@ -40,6 +40,22 @@
   height: 14px;
   background-color: #58585a;
 }
+
+:global(.rc-slider-mark){
+  padding-top:7px;
+  z-index: 6000;
+}
+:global(.rc-slider-step span){
+  background-color: rgb(44, 71, 112);
+  border-color: rgb(44, 71, 112);
+  z-index: 6000;
+}
+:global(.rc-slider-handle){
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+  z-index: 6000;
+}
+
 .metrics{
   width: 100%;
   display: flex;
