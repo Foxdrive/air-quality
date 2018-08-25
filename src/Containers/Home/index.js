@@ -62,7 +62,7 @@ class MapContainer extends React.Component {
       const device = this._getDeviceByName(this.state.popupId)
       return (
         <Popup
-          anchor="bottom"
+          anchor="top"
           offsetTop= {40}
           longitude={device.lng}
           latitude={device.lat}
@@ -130,7 +130,7 @@ class MapContainer extends React.Component {
               Array.isArray(data) && 
               filter(data, (device) => last(device.measurement)[1] >= filterRange[0] && last(device.measurement)[1] <= filterRange[1])
               .map((device) =>
-                <Marker key={device.lat + device.lng} latitude={device.lat} longitude={device.lng}>
+                <Marker offsetLeft={-14} offsetTop={10} key={device.lat + device.lng} latitude={device.lat} longitude={device.lng}>
                   <img onClick={this.onMarkerClick} data-id={device.name} src={Comet} width="30px" alt={device.name} title={device.name}/>
                 </Marker>
               )
