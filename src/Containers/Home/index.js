@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import Loadable from 'react-loadable';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'rc-slider/assets/index.css';
 
@@ -10,8 +11,6 @@ import last from 'lodash/last'
 import find from 'lodash/find'
 import filter from 'lodash/filter';
 import Slider from 'rc-slider';
-import { VictoryChart, VictoryLine, VictoryVoronoiContainer, VictoryTooltip } from 'victory';
-
 import styleJSON from '../../style.json';
 import AppContext from '../../context.js';
 import Panel from '../../Components/Panel';
@@ -19,6 +18,27 @@ import Comet from '../../assets/images/cometa-icon.svg';
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
+
+const VictoryChart = Loadable({
+  loader: () => 
+    import('victory').then(m => m.VictoryChart),
+    loading: () => null
+});
+const VictoryLine = Loadable({
+  loader: () => 
+    import('victory').then(m => m.VictoryLine),
+    loading: () => null
+});
+const VictoryVoronoiContainer = Loadable({
+  loader: () => 
+    import('victory').then(m => m.VictoryVoronoiContainer),
+    loading: () => null
+});
+const VictoryTooltip = Loadable({
+  loader: () => 
+    import('victory').then(m => m.VictoryTooltip),
+    loading: () => null
+});
 
 class MapContainer extends React.Component {
   constructor(props) {
