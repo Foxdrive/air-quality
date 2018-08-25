@@ -10,7 +10,6 @@ import last from 'lodash/last'
 import find from 'lodash/find'
 import filter from 'lodash/filter';
 import Slider from 'rc-slider';
-import moment from 'moment';
 import { VictoryChart, VictoryLine, VictoryVoronoiContainer, VictoryTooltip } from 'victory';
 
 import styleJSON from '../../style.json';
