@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-import Loadable from 'react-loadable';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'rc-slider/assets/index.css';
 
@@ -12,7 +11,6 @@ import find from 'lodash/find'
 import filter from 'lodash/filter';
 import Slider from 'rc-slider';
 import styleJSON from '../../style.json';
-import AppContext from '../../context.js';
 import Panel from '../../Components/Panel';
 import Comet from '../../assets/images/cometa-icon.svg';
 
@@ -113,38 +111,33 @@ class MapContainer extends React.Component {
   }
 
   render(){
-    const { apiKey } = this.props;  
+    const { apiKey, data, filterRange } = this.props;  
     
     return (
-      <AppContext.Consumer>
-      {(state) =>
-        <div>
-          <Panel>
-            <div style={{width: '100%'}}>
-              <Range min={0} max={40000} step={1000} onChange={this.handleRangeChange} tipFormatter={value => `${value}`}></Range>
-            </div>
-            <div>
-              
-            </div>
-          </Panel>
-          <ReactMapGL
-            {...this.state.viewport}
-            mapboxApiAccessToken={apiKey}
-            mapStyle={styleJSON}
-            onViewportChange={this.handleOnViewportChange}
-            doubleClickZoom={false}>
-              {
-                Array.isArray(state.data) && filter(state.data, (device) => last(device.measurement)[1] >= state.filter[0] && last(device.measurement)[1] <= state.filter[1]).map((device) =>
-                  <Marker key={device.lat + device.lng} latitude={device.lat} longitude={device.lng}>
-                    <img onClick={this.onMarkerClick} data-id={device.name} src={Comet} width="30px" alt={device.name} title={device.name}/>
-                  </Marker>
-                )
-              }
-              {this.renderPopup()}
-          </ReactMapGL>
-        </div>
-      }     
-      </AppContext.Consumer>
+      <div>
+        <Panel>
+          <div style={{width: '100%'}}>
+            <Range min={0} max={40000} step={1000} onChange={this.handleRangeChange} tipFormatter={value => `${value}`}></Range>
+          </div>
+        </Panel>
+        <ReactMapGL
+          {...this.state.viewport}
+          mapboxApiAccessToken={apiKey}
+          mapStyle={styleJSON}
+          onViewportChange={this.handleOnViewportChange}
+          doubleClickZoom={false}>
+            {
+              Array.isArray(data) && 
+              filter(data, (device) => last(device.measurement)[1] >= filterRange[0] && last(device.measurement)[1] <= filterRange[1])
+              .map((device) =>
+                <Marker key={device.lat + device.lng} latitude={device.lat} longitude={device.lng}>
+                  <img onClick={this.onMarkerClick} data-id={device.name} src={Comet} width="30px" alt={device.name} title={device.name}/>
+                </Marker>
+              )
+            }
+            {this.renderPopup()}
+        </ReactMapGL>
+      </div>
     );
   }
 }

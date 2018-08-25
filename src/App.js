@@ -13,9 +13,9 @@ class App extends React.Component {
     this.requestData = this.requestData.bind(this);
     this.state = {
       data: {},
-      filter: [],
-      filterDevices: (filter) => {
-        this.setState({filter})
+      filterRange: [],
+      filterDevices: (filterRange) => {
+        this.setState({filterRange})
       }
     };
   }
@@ -39,7 +39,7 @@ class App extends React.Component {
         <AppContext.Provider value={this.state}>
           <TopNav />
             <AppContext.Consumer>
-              {(state) => <Home apiKey={this.props.apiKey} data={state.data} filterDevices={state.filterDevices} />}
+              {(state) => <Home apiKey={this.props.apiKey} {...state}/>}
             </AppContext.Consumer>
         </AppContext.Provider>
       </main>
