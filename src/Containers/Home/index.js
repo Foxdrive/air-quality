@@ -10,6 +10,8 @@ import last from 'lodash/last'
 import find from 'lodash/find'
 import filter from 'lodash/filter';
 import Slider from 'rc-slider';
+import moment from 'moment';
+import { VictoryChart, VictoryLine, VictoryVoronoiContainer, VictoryTooltip } from 'victory';
 
 import styleJSON from '../../style.json';
 import AppContext from '../../context.js';
@@ -70,10 +72,16 @@ class MapContainer extends React.Component {
           latitude={device.lat}
           onClose={this.onClosePopup} >
           <div>
-            <p>THIS IS A POPUP</p>
-            <p>THIS IS A POPUP</p>
-            <p>THIS IS A POPUP</p>
-            <p>THIS IS A POPUP</p>
+            <VictoryChart 
+              scale={{ x: "time" }}
+              containerComponent={<VictoryVoronoiContainer/>}
+            >
+              <VictoryLine
+                data={device.measurement.map(dataset => ({x: dataset[0], y: dataset[1], label: dataset[1]}))}
+                labels={(data) => `x: ${data.x}`}
+                labelComponent={<VictoryTooltip/>}
+              />
+            </VictoryChart>
           </div>
         </Popup>
       )

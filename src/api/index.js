@@ -14,7 +14,7 @@ class FetchData {
       const measurements = resultsArray.slice(0,(resultsArray.length/2));
       let parsedData =  measurements.reduce((parsedResult, current, i) => {
         parsedResult.push({
-          measurement: current.series && current.series[0].values.map(measurement => [moment.unix(measurement[0]).format('HH:mm'), measurement[1]]),
+          measurement: current.series && current.series[0].values.map(measurement => [moment.unix(measurement[0]), measurement[1]]),
           lat: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].values[0][1],
           lng: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].values[0][2],
           name: resultsArray[i + (resultsArray.length/2)].series && resultsArray[i + (resultsArray.length/2)].series[0].name
