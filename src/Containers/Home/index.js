@@ -12,7 +12,7 @@ import filter from 'lodash/filter';
 import Slider from 'rc-slider';
 import styleJSON from '../../style.json';
 import Panel from '../../Components/Panel';
-import Comet from '../../assets/images/cometa-icon.svg';
+import MarkerIcon from '../../Components/MarkerIcon'
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -89,7 +89,7 @@ class MapContainer extends React.Component {
   }
 
   onMarkerClick(e) {
-    this.setState({popupId: e.target.dataset.id});
+    this.setState({popupId: e.currentTarget.dataset.id});
   }
 
   onClosePopup() {
@@ -131,7 +131,19 @@ class MapContainer extends React.Component {
               filter(data, (device) => last(device.measurement)[1] >= filterRange[0] && last(device.measurement)[1] <= filterRange[1])
               .map((device) =>
                 <Marker offsetLeft={-14} offsetTop={10} key={device.lat + device.lng} latitude={device.lat} longitude={device.lng}>
-                  <img onClick={this.onMarkerClick} data-id={device.name} src={Comet} width="30px" alt={device.name} title={device.name}/>
+                  <MarkerIcon measurement={last(device.measurement[1])}>
+                    {
+                      ({color}) => (
+                        <svg onClick={this.onMarkerClick} data-id={device.name} alt={device.name} title={device.name} width="30px" viewBox='0 0 100 100'>
+                          <path 
+                            fill={color}
+                            d='M51.9,0.2c4.9,1.2,7.8,5.1,11,8.5c8.7,9,17.3,18,25.9,27.1c4,4.2,4.4,9.8,1,14.5	C79.4,65.2,68.8,80.1,58.3,95c-4.9,6.8-14.1,6.6-18.7-0.4C29.6,79.5,19.7,64.4,9.9,49.3c-3.1-4.8-2.5-10.3,1.6-14.5	c9.3-9.5,18.7-18.9,27.9-28.4c2.6-2.6,5.2-5.2,8.9-6.2C49.5-0.1,50.5-0.1,51.9,0.2z'
+                          />
+                        </svg>
+                      )
+                    }
+                  </MarkerIcon>
+                  {/* <img onClick={this.onMarkerClick} data-id={device.name} src={MarkerIcon} width="30px" alt={device.name} title={device.name}/> */}
                 </Marker>
               )
             }
