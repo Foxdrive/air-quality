@@ -28,7 +28,7 @@ class MapContainer extends React.Component {
         longitude: -75.574830,
         zoom: 12
       },
-      popupId: null // true to show, false to hide
+      popupId: null
     };
 
     this.handleOnViewportChange = this.handleOnViewportChange.bind(this);
@@ -143,7 +143,6 @@ class MapContainer extends React.Component {
                       )
                     }
                   </MarkerIcon>
-                  {/* <img onClick={this.onMarkerClick} data-id={device.name} src={MarkerIcon} width="30px" alt={device.name} title={device.name}/> */}
                 </Marker>
               )
             }
