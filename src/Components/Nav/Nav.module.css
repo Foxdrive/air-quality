@@ -21,8 +21,9 @@
   width: 100%;
   min-width: 980px;
   top: 0px;
-  height: 120px;
+  height: 170px;
   z-index: 5000;
+  background-color: rgba(0,0,0, 0.3)
 }
 .hc1centeredContent {
   position: absolute;

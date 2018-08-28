@@ -1,0 +1,13 @@
+:global(.mapboxgl-popup-anchor-top .mapboxgl-popup-tip){
+    border-bottom-color: #2a2933;
+}
+:global(.mapboxgl-popup-content){
+    padding: 15px 15px 15px;
+    background: #2a2933;
+    border-radius: 10px;
+}
+:global(.mapboxgl-popup-close-button){
+    right: 3px;
+    top: 3px;
+    color: #979ba9;
+}

@@ -47,8 +47,6 @@
 /******* tooltip global ********/
 :global(.rc-slider-tooltip){
   z-index: 6000;
-  visibility: visible !important;
-  display: block !important;
 }
 :global(.rc-slider-tooltip-inner) {
   padding: 6px 2px;
@@ -85,8 +83,10 @@
 }
 @media only screen and (max-width: 600px) {
   .panel {
+    top: calc(100% - 210px);
     left: 100%;
     width: 100%;
+    border-radius: 0;
     transition: all 0.4s ease;
   }
   .panel.open {
@@ -118,11 +118,11 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
     font-weight: bolder;
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
   }
 }
