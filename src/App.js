@@ -23,10 +23,10 @@ class App extends React.Component {
 
   async _fetchData() {
     const resource = `http://aqa.unloquer.org:8086/query?db=aqa&epoch=s&q=`;
-    const query = encodeURIComponent(`SELECT last("lng") AS "last_lng", last("lat") AS "last_lat", (0.4*last("pm10")) + (0.6*last("pm25")) AS "result" FROM "aqa"."autogen"././ WHERE time > now() - 1h GROUP BY time(15m)`);
+    const query = encodeURIComponent(`SELECT last("lng") AS "last_lng", last("lat") AS "last_lat", (0.4*last("pm10")) + (0.6*last("pm25")) AS "result" FROM "aqa"."autogen"././ WHERE time > now() - 24h GROUP BY time(30m)`);
     const request = await fetch(`${resource}${query}`);
     await request.ok && request.json()
-    .then((theResponse) => this.setState({...this.state, theResponse}));
+    .then((theResponse) => this.setState({...this.state, theResponse: theResponse.results[0].series}));
   }
 
   requestData() {
