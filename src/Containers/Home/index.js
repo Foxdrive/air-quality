@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import 'rc-slider/assets/index.css';
 
 
-import { VictoryChart, VictoryLine, VictoryVoronoiContainer, VictoryTooltip } from 'victory';
+import { VictoryChart, VictoryLabel, VictoryVoronoiContainer, VictoryTooltip, VictoryAxis, VictoryArea } from 'victory';
 import last from 'lodash/last'
 import find from 'lodash/find'
 import filter from 'lodash/filter';
@@ -13,6 +13,7 @@ import Slider from 'rc-slider';
 import styleJSON from '../../style.json';
 import Panel from '../../Components/Panel';
 import MarkerIcon from '../../Components/MarkerIcon'
+import styles from './home.styles.css';
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -41,6 +42,7 @@ class MapContainer extends React.Component {
   }
 
   componentDidMount() {
+    this.props.filterDevices([0, 40000]);
     window.addEventListener('resize', this._resize);
     this._resize();
   }
@@ -66,14 +68,58 @@ class MapContainer extends React.Component {
           offsetTop= {40}
           longitude={device.lng}
           latitude={device.lat}
+          closeOnClick
           onClose={this.onClosePopup} >
           <div>
             <VictoryChart 
               scale={{ x: "time" }}
-              containerComponent={<VictoryVoronoiContainer/>}
+              height={200} 
+              width={300}
+              style={{
+                data: {
+                  color: "#979ba9"
+                },
+                labels: {fontSize: 12},
+                parent: {background: "#2a2933"}
+              }}
+              containerComponent={<VictoryVoronoiContainer responsive={false}/>}
             >
-              <VictoryLine
+              <VictoryLabel 
+                text={device.name}
+                x={20} 
+                y={20} 
+                textAnchor="start"
+                style= {{
+                  fill: "#979ba9"
+                }}
+              />
+              <VictoryAxis 
+                dependentAxis
+                style={{
+                  axis: {stroke: "#979ba9"},
+                  tickLabels: {
+                    fill: "#979ba9"
+                  }
+                }}
+              >
+              </VictoryAxis>
+              <VictoryAxis 
+                style={{
+                  axis: {stroke: "#979ba9"},
+                  tickLabels: {
+                    fill: "#979ba9"
+                  }
+                }}
+              />
+              <VictoryArea
                 data={device.measurement.map(dataset => ({x: dataset[0], y: dataset[1], label: dataset[1]}))}
+                style={{
+                  data: {
+                    stroke: "#94f267",
+                    fill: "rgba(148, 242, 103, 0.3)",
+                    strokeWidth: 2
+                  }
+                }}
                 labels={(data) => `x: ${data.x}`}
                 labelComponent={<VictoryTooltip/>}
               />
@@ -117,7 +163,7 @@ class MapContainer extends React.Component {
       <div>
         <Panel>
           <div style={{width: '100%'}}>
-            <Range min={0} max={40000} step={1000} onChange={this.handleRangeChange} tipFormatter={value => `${value}`}></Range>
+            <Range defaultValue={[0,40000]} min={0} max={40000} step={1000} onChange={this.handleRangeChange} tipFormatter={value => `${value}`}></Range>
           </div>
         </Panel>
         <ReactMapGL
