@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import moment from 'moment';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'rc-slider/assets/index.css';
 
@@ -9,6 +10,7 @@ import { VictoryChart, VictoryLabel, VictoryVoronoiContainer, VictoryTooltip, Vi
 import last from 'lodash/last'
 import find from 'lodash/find'
 import filter from 'lodash/filter';
+import inRange from 'lodash/inRange'
 import Slider from 'rc-slider';
 import styleJSON from '../../style.json';
 import Panel from '../../Components/Panel';
@@ -39,6 +41,7 @@ class MapContainer extends React.Component {
     this.onClosePopup = this.onClosePopup.bind(this);
     this._getDeviceByName = this._getDeviceByName.bind(this);
     this._resize = this._resize.bind(this);
+    this._calculateData = this._calculateData.bind(this);
   }
 
   componentDidMount() {
@@ -66,9 +69,9 @@ class MapContainer extends React.Component {
         <Popup
           anchor="top"
           offsetTop= {40}
-          longitude={device.lng}
-          latitude={device.lat}
-          closeOnClick
+          longitude={last(device.values)[1]}
+          latitude={last(device.values)[2]}
+          closeOnClick 
           onClose={this.onClosePopup} >
           <div>
             <VictoryChart 
@@ -112,7 +115,10 @@ class MapContainer extends React.Component {
                 }}
               />
               <VictoryArea
-                data={device.measurement.map(dataset => ({x: dataset[0], y: dataset[1], label: dataset[1]}))}
+                data={device.values.map(dataset => {
+                  const roundedData = Math.round(dataset[3]);
+                  return {x: moment.unix(dataset[0]), y: roundedData, label: roundedData}
+                })}
                 style={{
                   data: {
                     stroke: "#94f267",
@@ -132,6 +138,35 @@ class MapContainer extends React.Component {
       return null;
     }
     
+  }
+
+  _calculateData(dataset) {
+    const colorsTable = {
+      1: 'green',
+      2: 'yellow',
+      3: 'orange',
+      4: 'blue',
+      5: 'red'
+    };
+    const ranges = {
+      pm25: [
+        [0, 24], 
+        [24, 42],
+        [42, 54],
+        [54, 65],
+        [65, Infinity]
+      ],
+      pm10: [
+        [0, 34], 
+        [34, 59],
+        [59, 76],
+        [76, 92],
+        [92, Infinity]
+      ]
+    };
+    const pm10Value = ranges.pm10.indexOf(ranges.pm10.find((range) => inRange(dataset[3], range[0], range[1]))) + 1;
+    const pm25Value = ranges.pm25.indexOf(ranges.pm25.find((range) => inRange(dataset[4], range[0], range[1]))) + 1;
+    return [colorsTable[pm10Value], colorsTable[pm25Value]];
   }
 
   onMarkerClick(e) {
@@ -157,7 +192,7 @@ class MapContainer extends React.Component {
   }
 
   render(){
-    const { apiKey, data, filterRange, theResponse } = this.props;  
+    const { apiKey, data, filterRange } = this.props;  
     
     return (
       <div>
@@ -173,8 +208,8 @@ class MapContainer extends React.Component {
           onViewportChange={this.handleOnViewportChange}
           doubleClickZoom={false}>
             {
-              Array.isArray(theResponse) &&
-              filter(theResponse, (device) => last(device.values)[1] && last(device.values)[2])
+              Array.isArray(data) &&
+              filter(data, (device) => last(device.values)[1] && last(device.values)[2])
               .map((device) => {
                 const lastPosition = last(device.values);
                 return (
