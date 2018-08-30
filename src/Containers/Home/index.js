@@ -13,7 +13,7 @@ import Slider from 'rc-slider';
 import styleJSON from '../../style.json';
 import Panel from '../../Components/Panel';
 import MarkerIcon from '../../Components/MarkerIcon'
-import styles from './home.styles.css';
+import './home.styles.css';
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);

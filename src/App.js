@@ -11,6 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.requestData = this.requestData.bind(this);
+    this._fetchData = this._fetchData.bind(this);
     this.state = {
       data: {},
       filterRange: [],
@@ -18,6 +19,14 @@ class App extends React.Component {
         this.setState({filterRange})
       }
     };
+  }
+
+  async _fetchData() {
+    const resource = `http://aqa.unloquer.org:8086/query?db=aqa&epoch=s&q=`;
+    const query = encodeURIComponent(`SELECT last("lng") AS "last_lng", last("lat") AS "last_lat", (0.4*last("pm10")) + (0.6*last("pm25")) AS "result" FROM "aqa"."autogen"././ WHERE time > now() - 1h GROUP BY time(15m)`);
+    const request = await fetch(`${resource}${query}`);
+    await request.ok && request.json()
+    .then((theResponse) => this.setState({...this.state, theResponse}));
   }
 
   requestData() {
@@ -29,6 +38,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this._fetchData();
     this.requestData();
     setInterval((() => this.requestData()), 900000) 
   }
