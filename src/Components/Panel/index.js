@@ -22,12 +22,11 @@ class Panel extends React.Component {
         <p>Concentraciones de particulas PM 2,5 (ug/m<sup>3</sup>)</p>
         {this.props.children}
         <div className={styles.metrics}>
-          <span>0</span>
-          <span>100</span>
-          <span>200</span>
-          <span>300</span>
-          <span>400</span>
-          <span>500</span>
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
         </div>
         <div onClick={this.handleOnClick} className={styles.collapseButton}>
           <span>S</span>
