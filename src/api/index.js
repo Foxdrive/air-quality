@@ -1,5 +1,5 @@
 import config from '../config.js'
-import { INFLUXDB_TIMEFRAME_VALUE, INFLUXDB_GROUPBY_VALUE } from './constants.js';
+import { INFLUXDB_TIMEFRAME_VALUE, INFLUXDB_GROUPBY_VALUE } from '../constants.js';
 
 
 const fetchData = async() => {

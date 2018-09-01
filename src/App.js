@@ -5,6 +5,7 @@ import AppContext from './context.js';
 import Home from './Containers/Home';
 import TopNav from './Components/Nav';
 import fetchDevices from './api';
+import { REFRESH_REQUEST_INTERVAL } from './constants.js';
 
 class App extends React.Component {
 
@@ -21,7 +22,7 @@ class App extends React.Component {
 
   componentDidMount() {
     fetchDevices().then((data) => this.setState({...this.state, data: data.results[0].series}))
-    setInterval((() => this.requestData()), 900000) 
+    setInterval((() => this.requestData()), REFRESH_REQUEST_INTERVAL) 
   }
 
   render() {

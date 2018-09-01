@@ -1,2 +1,0 @@
-export const INFLUXDB_TIMEFRAME_VALUE = '24h';
-export const INFLUXDB_GROUPBY_VALUE = '30m';
