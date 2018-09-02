@@ -16,7 +16,7 @@ import Panel from '../../Components/Panel';
 import MarkerIcon from '../../Components/MarkerIcon'
 import graphTheme from './graphTheme';
 import { measurementsConfig } from '../../config.js';
-import './styles.css';
+import { MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE, MAP_DEFAULT_ZOOM } from '../../constants.js'
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -28,9 +28,9 @@ class MapContainer extends React.Component {
       viewport: {
         width: window.innerWidth,
         height: window.innerHeight,
-        latitude: 6.244750,
-        longitude: -75.574830,
-        zoom: 12
+        latitude: MAP_DEFAULT_LATITUDE,
+        longitude: MAP_DEFAULT_LONGITUDE,
+        zoom: MAP_DEFAULT_ZOOM
       },
       popupId: null
     };
