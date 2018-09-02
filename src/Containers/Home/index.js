@@ -13,7 +13,6 @@ import inRange from 'lodash/inRange'
 
 import styleJSON from '../../style.json';
 import Panel from '../../Components/Panel';
-import MarkerIcon from '../../Components/MarkerIcon'
 import graphTheme from './graphTheme';
 import { measurementsConfig } from '../../config.js';
 import { MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE, MAP_DEFAULT_ZOOM } from '../../constants.js'
@@ -156,18 +155,14 @@ class MapContainer extends React.Component {
                 return (
                   (lastPosition[1] && lastPosition[2] !== null) && inRange(weightedData[0], filterRange[0], filterRange[1] + 1) &&
                     <Marker offsetLeft={-14} offsetTop={10} key={lastPosition[1] + lastPosition[2]} latitude={lastPosition[2]} longitude={lastPosition[1]}>
-                      <MarkerIcon measurement={lastPosition[3]}>
-                        {
-                          () => (
-                            <svg onClick={this.onMarkerClick} data-id={device.name} alt={device.name} title={device.name} width="30px" viewBox='0 0 100 100'>
-                              <path 
-                                fill={weightedData[1]}
-                                d='M51.9,0.2c4.9,1.2,7.8,5.1,11,8.5c8.7,9,17.3,18,25.9,27.1c4,4.2,4.4,9.8,1,14.5	C79.4,65.2,68.8,80.1,58.3,95c-4.9,6.8-14.1,6.6-18.7-0.4C29.6,79.5,19.7,64.4,9.9,49.3c-3.1-4.8-2.5-10.3,1.6-14.5	c9.3-9.5,18.7-18.9,27.9-28.4c2.6-2.6,5.2-5.2,8.9-6.2C49.5-0.1,50.5-0.1,51.9,0.2z'
-                              />
-                            </svg>
-                          )
-                        }
-                      </MarkerIcon>
+                      {
+                        <svg onClick={this.onMarkerClick} data-id={device.name} alt={device.name} title={device.name} width="30px" viewBox='0 0 100 100'>
+                          <path 
+                            fill={weightedData[1]}
+                            d='M51.9,0.2c4.9,1.2,7.8,5.1,11,8.5c8.7,9,17.3,18,25.9,27.1c4,4.2,4.4,9.8,1,14.5	C79.4,65.2,68.8,80.1,58.3,95c-4.9,6.8-14.1,6.6-18.7-0.4C29.6,79.5,19.7,64.4,9.9,49.3c-3.1-4.8-2.5-10.3,1.6-14.5	c9.3-9.5,18.7-18.9,27.9-28.4c2.6-2.6,5.2-5.2,8.9-6.2C49.5-0.1,50.5-0.1,51.9,0.2z'
+                          />
+                        </svg>
+                      }
                     </Marker>
                 )
               }
