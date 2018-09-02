@@ -2,19 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import moment from 'moment';
+import Slider from 'rc-slider';
+import { VictoryChart, VictoryLabel, VictoryVoronoiContainer, VictoryTooltip, VictoryAxis, VictoryArea } from 'victory';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'rc-slider/assets/index.css';
 
-
-import { VictoryChart, VictoryLabel, VictoryVoronoiContainer, VictoryTooltip, VictoryAxis, VictoryArea } from 'victory';
 import last from 'lodash/last'
 import find from 'lodash/find'
 import inRange from 'lodash/inRange'
-import Slider from 'rc-slider';
+
 import styleJSON from '../../style.json';
 import Panel from '../../Components/Panel';
 import MarkerIcon from '../../Components/MarkerIcon'
-import './home.styles.css';
+import './styles.css';
+import graphTheme from './graphTheme';
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -73,58 +74,20 @@ class MapContainer extends React.Component {
           closeOnClick 
           onClose={this.onClosePopup} >
           <div>
-            <VictoryChart 
-              scale={{ x: "time" }}
-              height={200} 
-              width={300}
-              style={{
-                data: {
-                  color: "#979ba9"
-                },
-                labels: {fontSize: 12},
-                parent: {background: "#2a2933"}
-              }}
-              containerComponent={<VictoryVoronoiContainer responsive={false}/>}
-            >
-              <VictoryLabel 
-                text={device.name}
-                x={20} 
-                y={20} 
-                textAnchor="start"
+            <VictoryChart theme={graphTheme} scale={{ x: "time" }} containerComponent={<VictoryVoronoiContainer responsive={false}/>} >
+              <VictoryLabel text={device.name} x={20} y={20} textAnchor="start"
                 style= {{
                   fill: "#979ba9"
                 }}
               />
-              <VictoryAxis 
-                dependentAxis
-                style={{
-                  axis: {stroke: "#979ba9"},
-                  tickLabels: {
-                    fill: "#979ba9"
-                  }
-                }}
-              >
+              <VictoryAxis dependentAxis>
               </VictoryAxis>
-              <VictoryAxis 
-                style={{
-                  axis: {stroke: "#979ba9"},
-                  tickLabels: {
-                    fill: "#979ba9"
-                  }
-                }}
-              />
+              <VictoryAxis tickFormat= {(tick) => moment(tick).format('hh a')} />
               <VictoryArea
                 data={device.values.map(dataset => {
                   const roundedData = Math.round(dataset[3]);
                   return {x: moment.unix(dataset[0]), y: roundedData, label: roundedData}
                 })}
-                style={{
-                  data: {
-                    stroke: "#94f267",
-                    fill: "rgba(148, 242, 103, 0.3)",
-                    strokeWidth: 2
-                  }
-                }}
                 labels={(data) => `x: ${data.x}`}
                 labelComponent={<VictoryTooltip/>}
               />

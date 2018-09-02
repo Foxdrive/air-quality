@@ -1,3 +1,6 @@
 export const INFLUXDB_TIMEFRAME_VALUE = '24h';
 export const INFLUXDB_GROUPBY_VALUE = '30m';
 export const REFRESH_REQUEST_INTERVAL = 900000;
+export const MAP_DEFAULT_LATITUDE = 6.244750;
+export const MAP_DEFAULT_LONGITUDE = -75.574830;
+export const MAP_DEFAULT_ZOOM = 12;

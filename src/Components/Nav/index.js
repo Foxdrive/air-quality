@@ -54,7 +54,7 @@ class Nav extends React.Component {
             </div>
           </div>
         </div>
-        <a href onClick={this.handleOnClick} className={classNames(styles.tm1_menuInitial, styles['tm1_dir-center'], styles.tm1menuButton, {[styles.tm1_menuOpen]:this.state.isCollapsed})}>
+        <a onClick={this.handleOnClick} className={classNames(styles.tm1_menuInitial, styles['tm1_dir-center'], styles.tm1menuButton, {[styles.tm1_menuOpen]:this.state.isCollapsed})}>
           <svg preserveAspectRatio={this.state.isCollapsed ? '' : 'none'} viewBox="0 0 17 17" className={classNames(styles.tm1_icon, styles.tm1iconSVG)} >
             <line x2="100%" className={classNames(styles.tm1_line1, styles['tm1_animating-line'])}></line>
             <line x2="100%" className={classNames(styles.tm1_line2, styles['tm1_animating-line'])}></line>

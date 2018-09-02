@@ -19,7 +19,7 @@ class Panel extends React.Component {
     return (
       <article className={classNames(styles.panel, {[styles.open]:this.state.isPanelCollapsed})}>
         <h3>Mediciones Calidad del aire</h3>
-        <p>Concentraciones de particulas PM 2,5 (ug/m<sup>3</sup>)</p>
+        <p>Concentraciones de particulas</p>
         {this.props.children}
         <div className={styles.metrics}>
           <span>1</span>

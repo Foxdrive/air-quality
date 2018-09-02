@@ -5,13 +5,17 @@ import AppContext from './context.js';
 import Home from './Containers/Home';
 import TopNav from './Components/Nav';
 import fetchDevices from './api';
-import { REFRESH_REQUEST_INTERVAL } from './constants.js';
+import { REFRESH_REQUEST_INTERVAL, MAP_DEFAULT_LATITUDE, MAP_DEFAULT_LONGITUDE} from './constants.js';
+
+import './App.css';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      defaultLat: MAP_DEFAULT_LATITUDE,
+      defaultLng: MAP_DEFAULT_LONGITUDE,
       data: {},
       filterRange: [],
       filterDevices: (filterRange) => {
