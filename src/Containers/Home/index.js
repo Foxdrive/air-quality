@@ -14,8 +14,9 @@ import inRange from 'lodash/inRange'
 import styleJSON from '../../style.json';
 import Panel from '../../Components/Panel';
 import MarkerIcon from '../../Components/MarkerIcon'
-import './styles.css';
 import graphTheme from './graphTheme';
+import { measurementsConfig } from '../../config.js';
+import './styles.css';
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -103,33 +104,10 @@ class MapContainer extends React.Component {
   }
 
   _calculateData(dataset) {
-    const colorsTable = {
-      1: '#9f0',
-      2: '#fc0',
-      3: '#f60',
-      4: '#f00',
-      5: '#f06'
-    };
-    const ranges = {
-      pm25: [
-        [0, 24], 
-        [24, 42],
-        [42, 54],
-        [54, 65],
-        [65, Infinity]
-      ],
-      pm10: [
-        [0, 34], 
-        [34, 59],
-        [59, 76],
-        [76, 92],
-        [92, Infinity]
-      ]
-    };
-    const pm10Value = ranges.pm10.indexOf(ranges.pm10.find((range) => inRange(dataset[3], range[0], range[1]))) + 1;
-    const pm25Value = ranges.pm25.indexOf(ranges.pm25.find((range) => inRange(dataset[4], range[0], range[1]))) + 1;
+    const pm10Value = measurementsConfig.ranges.pm10.indexOf(measurementsConfig.ranges.pm10.find((range) => inRange(dataset[3], range[0], range[1]))) + 1;
+    const pm25Value = measurementsConfig.ranges.pm25.indexOf(measurementsConfig.ranges.pm25.find((range) => inRange(dataset[4], range[0], range[1]))) + 1;
     const finalValue = Math.round((0.4*pm10Value) + (0.6*pm25Value));
-    return [finalValue, colorsTable[finalValue]];
+    return [finalValue, measurementsConfig.colorsTable[finalValue]];
   }
 
   onMarkerClick(e) {
