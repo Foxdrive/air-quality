@@ -96,7 +96,6 @@
             "type": "vector"
         }
     },
-    "sprite": "mapbox://sprites/andresburns/cjhdixu0h1pf22sqgd0ekeg8m",
     "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
     "layers": [
         {
