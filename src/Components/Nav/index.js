@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './Nav.module.css';
 import classNames from 'classnames';
 import Media from "react-media";
+import BgVideo from "../../assets/images/bg-video.mp4";
+import BgImage from "../../assets/images/bg.webp";
 
 class Nav extends React.Component {
   
@@ -147,6 +149,10 @@ class Nav extends React.Component {
   render(){
     return(
       <header className={styles.hc1}>
+        <video autoplay="autoplay" loop="true" width="100%" className={styles.bgVideovideo}>
+          <source src={BgVideo} type="video/mp4"></source>
+        </video>
+        <img src={BgImage} width="100%" className={styles.bgColorsImage} />
         <div className={styles.hc1screenWidthBackground}></div>
         <div className={styles.hc1centeredContent}>
           <div className={styles.hc1bg}></div>
