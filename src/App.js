@@ -35,7 +35,7 @@ class App extends React.Component {
         <AppContext.Provider value={this.state}>
           <TopNav />
             <AppContext.Consumer>
-              {(state) => <Home apiKey={this.props.apiKey} {...state}/>}
+              {(state) => <Home apiKey={this.props.apiKey} tileset={this.props.tileset} {...state}/>}
             </AppContext.Consumer>
         </AppContext.Provider>
       </main>
@@ -44,7 +44,8 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  apiKey: PropTypes.string
+  apiKey: PropTypes.string,
+  tileset: PropTypes.string
 }
 
 export default App;

@@ -11,7 +11,6 @@ import last from 'lodash/last'
 import find from 'lodash/find'
 import inRange from 'lodash/inRange'
 
-import styleJSON from '../../style.json';
 import Panel from '../../Components/Panel';
 import graphTheme from './graphTheme';
 import { measurementsConfig } from '../../config.js';
@@ -132,8 +131,7 @@ class MapContainer extends React.Component {
   }
 
   render(){
-    const { apiKey, data, filterRange } = this.props;  
-    
+    const { apiKey, tileset, data, filterRange } = this.props;  
     return (
       <div>
         <Panel>
@@ -144,7 +142,7 @@ class MapContainer extends React.Component {
         <ReactMapGL
           {...this.state.viewport}
           mapboxApiAccessToken={apiKey}
-          mapStyle={styleJSON}
+          mapStyle={tileset}
           onViewportChange={this.handleOnViewportChange}
           doubleClickZoom={false}>
             {
@@ -176,7 +174,8 @@ class MapContainer extends React.Component {
 }
 
 MapContainer.propTypes = {
-  apiKey: PropTypes.string
+  apiKey: PropTypes.string,
+  tileset: PropTypes.string
 };
 
 export default MapContainer;
